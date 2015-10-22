@@ -5,7 +5,6 @@ A simple html boilerplate with Browser-Sync live reloading through gulp.
 * Make sure [Node.js](https://nodejs.org), [gulp](http://gulpjs.com) and [Browsersync](http://www.browsersync.io/) is installed. 
 * To install gulp: `npm install -g gulp`
 * To install Browsersync: `npm install -g browser-sync`
-* 
 
 ### How to install and use
 * Install the dependencies with `npm install`
@@ -16,7 +15,6 @@ A simple html boilerplate with Browser-Sync live reloading through gulp.
 * Not much at the moment. Gulp will watch scss files and html files in the src directory and copy it to the build folder.
 * Errors in the css or html will be displayed in a popup
 * Browsersync will serve the website at http://localhost:3002 and automatically inject or refresh on changes.
-* 
 
 ### File structure
 ```
