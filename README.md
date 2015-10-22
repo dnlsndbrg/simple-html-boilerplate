@@ -18,7 +18,7 @@ A simple html boilerplate with Browser-Sync live reloading through gulp.
 
 ### File structure
 ```
-gulp-boilerplate/
+simple-html-boilerplate/
 |—— build/
 |   |—— index.html
 |   |—— css/
