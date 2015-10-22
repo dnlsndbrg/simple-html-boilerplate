@@ -14,7 +14,7 @@ A simple html boilerplate with Browser-Sync live reloading through gulp.
 ### What it does
 * Not much at the moment. Gulp will watch scss files and html files in the src directory and copy it to the build folder.
 * Errors in the css or html will be displayed in a popup
-* Browsersync will serve the website at http://localhost:3002 and automatically inject or refresh on changes.
+* Browsersync will serve the website at http://localhost:3000 and automatically inject or refresh on changes.
 
 ### File structure
 ```
