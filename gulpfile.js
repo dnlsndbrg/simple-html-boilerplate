@@ -1,3 +1,4 @@
+
 // --------------------------------------------------
 // Require                               
 // --------------------------------------------------
@@ -8,6 +9,7 @@ var gulp        = require('gulp'),
     notifier    = require('node-notifier'),
     htmlhint    = require("gulp-htmlhint"),
     browserSync = require('browser-sync').create();
+
 
 // --------------------------------------------------
 // Error handler                                  
@@ -35,7 +37,6 @@ gulp.task('serve', ['sass'], function() {
     });
 
     gulp.watch("src/scss/*.scss", ['sass']);
-    //gulp.watch("app/*.html").on('change', browserSync.reload);
     gulp.watch("src/*.html", ['html']);
 });
 
@@ -67,4 +68,8 @@ gulp.task('html', function() {
 });
 
 
+// --------------------------------------------------
+// Default task
+// --------------------------------------------------
+// 
 gulp.task('default', ['sass', 'html', 'serve']);
