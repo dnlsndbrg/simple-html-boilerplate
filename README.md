@@ -5,7 +5,6 @@ A simple html boilerplate with Browser-Sync live reloading through gulp.
 * Make sure [Node.js](https://nodejs.org), [gulp](http://gulpjs.com) and [Browsersync](http://www.browsersync.io/) is installed. 
 * To install gulp: `npm install -g gulp`
 * To install Browsersync: `npm install -g browser-sync`
-
 * Install the dependencies with `npm install`
 * Start gulp with `gulp`
 
