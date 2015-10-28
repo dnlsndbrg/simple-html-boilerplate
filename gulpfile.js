@@ -7,7 +7,7 @@ var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     plumber     = require('gulp-plumber'),
     notifier    = require('node-notifier'),
-    htmlhint    = require("gulp-htmlhint"),
+    htmlhint    = require('gulp-htmlhint'),
     browserSync = require('browser-sync').create();
 
 
@@ -27,29 +27,14 @@ var onError = function(err) {
 
 
 // --------------------------------------------------
-// Static Server + watching scss/html files
-// --------------------------------------------------
-
-gulp.task('serve', ['sass'], function() {
-
-    browserSync.init({
-        server: "./build"
-    });
-
-    gulp.watch("src/scss/*.scss", ['sass']);
-    gulp.watch("src/*.html", ['html']);
-});
-
-
-// --------------------------------------------------
 // Compile sass into CSS & auto-inject into browsers
 // --------------------------------------------------
 
 gulp.task('sass', function() {
-    return gulp.src("./src/scss/*.scss")
+    return gulp.src('./src/scss/*.scss')
     	.pipe(plumber({errorHandler: onError}))
         .pipe(sass())
-        .pipe(gulp.dest("build/css"))
+        .pipe(gulp.dest('build/css'))
         .pipe(browserSync.stream());
 });
 
@@ -63,10 +48,35 @@ gulp.task('html', function() {
 		.pipe(plumber({errorHandler: onError}))
     	.pipe(htmlhint())
     	.pipe(htmlhint.failReporter())
-        .pipe(gulp.dest("build/"))
+        .pipe(gulp.dest('build/'))
     	.pipe(browserSync.stream());
 });
 
+
+// --------------------------------------------------
+// Copy image files
+// --------------------------------------------------
+
+gulp.task('img', function(){
+  gulp.src('src/img/*')
+      .pipe(gulp.dest('build/img/'));
+});
+
+
+// --------------------------------------------------
+// Static Server + watching scss/html files
+// --------------------------------------------------
+
+gulp.task('serve', ['sass'], function() {
+
+    browserSync.init({
+        server: "./build"
+    });
+
+    gulp.watch("src/scss/*.scss", ['sass']);
+    gulp.watch("src/*.html", ['html']);
+    gulp.watch("src/img/*", ['img']);
+});
 
 // --------------------------------------------------
 // Default task
