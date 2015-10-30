@@ -4,6 +4,7 @@
 // --------------------------------------------------
 
 var gulp        = require('gulp'),
+    chalk       = require('chalk'),
     sass        = require('gulp-sass'),
     plumber     = require('gulp-plumber'),
     notifier    = require('node-notifier'),
@@ -19,15 +20,19 @@ var onError = function(err) {
     var title;
     var line;
     if (err.plugin === 'gulp-html5-lint') {
-        title = "html5lint";
-        line = err.message.match(/\d+\:\d+/)[0].replace(/\:\d+/, '');
+        title = "html";
+        console.log(err)
+        line = err.message.match(/\d+\:\d+/);
+        if(line) { line = line[0].replace(/\:\d+/, '') }
     } else if(err.plugin === 'gulp-sass') {
-        title = 'sass';
+        title = 'css';
         line = err.line;
     }
 
+    console.log(chalk.bgRed.white(title) + chalk.red(' error on line: ' + line + '\n' + err.message));
+
 	notifier.notify({
-		title: title + ' | line: ' + line, 
+		title: title + ' error | line: ' + line, 
 		message: err.message,
 		icon: __dirname+'/gulp-logo.png',
 		time: 5000
@@ -50,7 +55,7 @@ gulp.task('sass', function() {
 
 
 // --------------------------------------------------
-// HTMLhinting and browser refresh
+// HTML linting and browser refresh
 // --------------------------------------------------
 
 gulp.task('html', function() {
