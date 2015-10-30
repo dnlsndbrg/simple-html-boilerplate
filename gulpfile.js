@@ -21,7 +21,6 @@ var onError = function(err) {
     var line;
     if (err.plugin === 'gulp-html5-lint') {
         title = "html";
-        console.log(err)
         line = err.message.match(/\d+\:\d+/);
         if(line) { line = line[0].replace(/\:\d+/, '') }
     } else if(err.plugin === 'gulp-sass') {
