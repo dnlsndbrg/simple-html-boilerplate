@@ -7,7 +7,7 @@ var gulp        = require('gulp'),
     sass        = require('gulp-sass'),
     plumber     = require('gulp-plumber'),
     notifier    = require('node-notifier'),
-    htmlhint    = require('gulp-htmlhint'),
+    html5lint   = require('gulp-html5-lint'),
     browserSync = require('browser-sync').create();
 
 
@@ -16,8 +16,18 @@ var gulp        = require('gulp'),
 // --------------------------------------------------
 
 var onError = function(err) {
+    var title;
+    var line;
+    if (err.plugin === 'gulp-html5-lint') {
+        title = "html5lint";
+        line = err.message.match(/\d+\:\d+/)[0].replace(/\:\d+/, '');
+    } else if(err.plugin === 'gulp-sass') {
+        title = 'sass';
+        line = err.line;
+    }
+
 	notifier.notify({
-		title: err.plugin.substring(5), 
+		title: title + ' | line: ' + line, 
 		message: err.message,
 		icon: __dirname+'/gulp-logo.png',
 		time: 5000
@@ -46,8 +56,7 @@ gulp.task('sass', function() {
 gulp.task('html', function() {
 	return gulp.src("./src/*.html")
 		.pipe(plumber({errorHandler: onError}))
-    	.pipe(htmlhint())
-    	.pipe(htmlhint.failReporter())
+    	.pipe(html5lint())
         .pipe(gulp.dest('build/'))
     	.pipe(browserSync.stream());
 });
@@ -58,8 +67,8 @@ gulp.task('html', function() {
 // --------------------------------------------------
 
 gulp.task('img', function(){
-  gulp.src('src/img/*')
-      .pipe(gulp.dest('build/img/'));
+    gulp.src('src/img/*')
+        .pipe(gulp.dest('build/img/'));
 });
 
 
@@ -82,4 +91,4 @@ gulp.task('serve', ['sass'], function() {
 // Default task
 // --------------------------------------------------
 // 
-gulp.task('default', ['sass', 'html', 'serve']);
+gulp.task('default', ['sass', 'html', 'img', 'serve']);
