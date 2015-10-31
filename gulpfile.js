@@ -45,7 +45,7 @@ var onError = function(err) {
 // --------------------------------------------------
 
 gulp.task('sass', function() {
-    return gulp.src('./src/scss/*.scss')
+    return gulp.src('src/scss/*.scss')
     	.pipe(plumber({errorHandler: onError}))
         .pipe(sass())
         .pipe(gulp.dest('build/css'))
@@ -58,7 +58,7 @@ gulp.task('sass', function() {
 // --------------------------------------------------
 
 gulp.task('html', function() {
-	return gulp.src("./src/*.html")
+	return gulp.src("src/*.html")
 		.pipe(plumber({errorHandler: onError}))
     	.pipe(html5lint())
         .pipe(gulp.dest('build/'));
