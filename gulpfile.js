@@ -61,8 +61,7 @@ gulp.task('html', function() {
 	return gulp.src("./src/*.html")
 		.pipe(plumber({errorHandler: onError}))
     	.pipe(html5lint())
-        .pipe(gulp.dest('build/'))
-    	.pipe(browserSync.stream());
+        .pipe(gulp.dest('build/'));
 });
 
 
@@ -83,12 +82,12 @@ gulp.task('img', function(){
 gulp.task('serve', ['sass'], function() {
 
     browserSync.init({
-        server: "./build"
+        server: './build'
     });
 
-    gulp.watch("src/scss/*.scss", ['sass']);
-    gulp.watch("src/*.html", ['html']);
-    gulp.watch("src/img/*", ['img']);
+    gulp.watch('src/scss/*.scss', ['sass']);
+    gulp.watch('src/*.html', ['html', browserSync.reload]);
+    gulp.watch('src/img/*', ['img']);
 });
 
 // --------------------------------------------------
